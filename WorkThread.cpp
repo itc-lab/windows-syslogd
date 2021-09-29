@@ -270,10 +270,15 @@ UINT CWorkThread::Run(LPVOID pParam)
 			continue;
 		}
 		rawdata[ln] = '\0';
+		ln = strcspn(rawdata, "\r\n");
+		rawdata[ln] = '\0';
+		if (((CSrvcMain*)m_pMain)->bDebug) {
+			printf("recv data: '%s'\n", rawdata);
+		}
 
 		std::string from_ip = inet_ntoa( from.sin_addr );
 
-		std::regex re("\\<([\\d]+)\\>(.+)");
+		std::regex re(".*\\<([\\d]+)\\>(.+)");
 		std::match_results<const char *> match;
 		//std::smatch match;
 		if ( std::regex_match( rawdata, match, re, std::regex_constants::match_default ) ) {
