@@ -173,7 +173,7 @@ void CWorkThread::read_config() {
 					pbit = this->str2priority( pri );
 					while( pbit != 0 ) {
 						pmask |= pbit;
-						pbit <<= 1;
+						pbit >>= 1;
 					}
 				}
 
@@ -388,17 +388,17 @@ DWORD CWorkThread::str2facility( const std::string &facility ) const {
 
 BYTE CWorkThread::str2priority( const std::string &priority ) const {
 	if ( !_stricmp( priority.c_str(), "*" ) ) return 0xff;
-	if ( !_stricmp( priority.c_str(), "emerg" ) ) return 1 << 7;
-	if ( !_stricmp( priority.c_str(), "alert" ) ) return 1 << 6;
-	if ( !_stricmp( priority.c_str(), "crit" ) ) return 1 << 5;
-	if ( !_stricmp( priority.c_str(), "err" ) ) return 1 << 4;
-	if ( !_stricmp( priority.c_str(), "warning" ) ) return 1 << 3;
-	if ( !_stricmp( priority.c_str(), "notice" ) ) return 1 << 2;
-	if ( !_stricmp( priority.c_str(), "info" ) ) return 1 << 1;
-	if ( !_stricmp( priority.c_str(), "debug" ) ) return 1 << 0;
+	if ( !_stricmp( priority.c_str(), "emerg" ) ) return 1 << 0;
+	if ( !_stricmp( priority.c_str(), "alert" ) ) return 1 << 1;
+	if ( !_stricmp( priority.c_str(), "crit" ) ) return 1 << 2;
+	if ( !_stricmp( priority.c_str(), "err" ) ) return 1 << 3;
+	if ( !_stricmp( priority.c_str(), "warning" ) ) return 1 << 4;
+	if ( !_stricmp( priority.c_str(), "notice" ) ) return 1 << 5;
+	if ( !_stricmp( priority.c_str(), "info" ) ) return 1 << 6;
+	if ( !_stricmp( priority.c_str(), "debug" ) ) return 1 << 7;
 
-	if ( !_stricmp( priority.c_str(), "panic" ) ) return 1 << 7;
-	if ( !_stricmp( priority.c_str(), "error" ) ) return 1 << 4;
-	if ( !_stricmp( priority.c_str(), "warn" ) ) return 1 << 3;
+	if ( !_stricmp( priority.c_str(), "panic" ) ) return 1 << 0;
+	if ( !_stricmp( priority.c_str(), "error" ) ) return 1 << 3;
+	if ( !_stricmp( priority.c_str(), "warn" ) ) return 1 << 4;
 	return 0;
 }
