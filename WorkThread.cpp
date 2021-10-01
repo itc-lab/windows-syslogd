@@ -270,10 +270,15 @@ UINT CWorkThread::Run(LPVOID pParam)
 			continue;
 		}
 		rawdata[ln] = '\0';
+		ln = strcspn(rawdata, "\r\n");
+		rawdata[ln] = '\0';
+		if (((CSrvcMain*)m_pMain)->bDebug) {
+			printf("recv data: '%s'\n", rawdata);
+		}
 
 		std::string from_ip = inet_ntoa( from.sin_addr );
 
-		std::regex re("\\<([\\d]+)\\>(.+)");
+		std::regex re(".*\\<([\\d]+)\\>(.+)");
 		std::match_results<const char *> match;
 		//std::smatch match;
 		if ( std::regex_match( rawdata, match, re, std::regex_constants::match_default ) ) {
@@ -383,17 +388,17 @@ DWORD CWorkThread::str2facility( const std::string &facility ) const {
 
 BYTE CWorkThread::str2priority( const std::string &priority ) const {
 	if ( !_stricmp( priority.c_str(), "*" ) ) return 0xff;
-	if ( !_stricmp( priority.c_str(), "emerg" ) ) return 1 << 0;
-	if ( !_stricmp( priority.c_str(), "alert" ) ) return 1 << 1;
-	if ( !_stricmp( priority.c_str(), "crit" ) ) return 1 << 2;
-	if ( !_stricmp( priority.c_str(), "err" ) ) return 1 << 3;
-	if ( !_stricmp( priority.c_str(), "warning" ) ) return 1 << 4;
-	if ( !_stricmp( priority.c_str(), "notice" ) ) return 1 << 5;
-	if ( !_stricmp( priority.c_str(), "info" ) ) return 1 << 6;
-	if ( !_stricmp( priority.c_str(), "debug" ) ) return 1 << 7;
+	if ( !_stricmp( priority.c_str(), "emerg" ) ) return 1 << 7;
+	if ( !_stricmp( priority.c_str(), "alert" ) ) return 1 << 6;
+	if ( !_stricmp( priority.c_str(), "crit" ) ) return 1 << 5;
+	if ( !_stricmp( priority.c_str(), "err" ) ) return 1 << 4;
+	if ( !_stricmp( priority.c_str(), "warning" ) ) return 1 << 3;
+	if ( !_stricmp( priority.c_str(), "notice" ) ) return 1 << 2;
+	if ( !_stricmp( priority.c_str(), "info" ) ) return 1 << 1;
+	if ( !_stricmp( priority.c_str(), "debug" ) ) return 1 << 0;
 
-	if ( !_stricmp( priority.c_str(), "panic" ) ) return 1 << 0;
-	if ( !_stricmp( priority.c_str(), "error" ) ) return 1 << 3;
-	if ( !_stricmp( priority.c_str(), "warn" ) ) return 1 << 4;
+	if ( !_stricmp( priority.c_str(), "panic" ) ) return 1 << 7;
+	if ( !_stricmp( priority.c_str(), "error" ) ) return 1 << 4;
+	if ( !_stricmp( priority.c_str(), "warn" ) ) return 1 << 3;
 	return 0;
 }
