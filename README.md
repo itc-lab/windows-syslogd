@@ -55,7 +55,7 @@ _**Warning:** Since it cannot be overwritten as it is, copy it to another folder
 
 Below is a table of how much the specification is supported compared to FreeBSD's syslog.conf.
 
-| 機能                                     | 対応            |
+| Features                                 | Support         |
 | ---------------------------------------- | --------------- |
 | facility detection                       | ✔               |
 | The special facility "mark"              | ❌              |
