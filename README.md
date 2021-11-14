@@ -51,6 +51,31 @@ _**Warning:** Since it cannot be overwritten as it is, copy it to another folder
 ![Edit syslog conf](https://user-images.githubusercontent.com/76575923/140642519-738bdf73-83ea-4189-acd1-dce0cd8d7f30.png)|
 |:-:|
 
+## Usage
+Stop the syslogd service and start debugging with cmd.exe.
+```
+C:\Program Files (x86)\Common Files\syslogd>syslogd.exe -DEBUG
+```
+
+Enable the 514/UDP port on the firewall.
+![Enable firewall](https://user-images.githubusercontent.com/76575923/141675779-458af2cc-656f-4b78-8a96-564e16e411ee.png)|
+|:-:|
+
+By default, the logs are output to the C:\ProgramData\syslogd folder. C:\ProgramData\syslogd folder is created automatically.
+![syslogd folder](https://user-images.githubusercontent.com/76575923/141675664-add75370-1d06-400c-9901-e2444407e5f8.png)|
+|:-:|
+
+You can use Local System environment variables to set the log output destination. Example:%ProgramData%\%Date%.log
+
+```
+local0.err    %ProgramData%\%Date%.log
+```
+
+![syslog conf Example](https://user-images.githubusercontent.com/76575923/141675666-2173c8b2-dd51-401e-ac72-13dadd502ade.png)|
+|:-:|
+
+Stop debugging, start the syslogd service.
+
 ## syslog.conf
 
 Below is a table of how much the specification is supported compared to FreeBSD's syslog.conf.
