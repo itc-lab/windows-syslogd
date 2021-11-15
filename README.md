@@ -47,7 +47,7 @@ Make sure that the "Syslog Server" service is started.
 |:-:|
 
 Edit `C:\Program Files (x86)\Common Files\syslogd\syslog.conf`.  
-_**Warning:** Since it cannot be overwritten as it is, copy it to another folder, edit it, and overwrite it._
+_**Warning:** Since it cannot be overwritten as it is, copy it to another directory, edit it, and overwrite it._
 ![Edit syslog conf](https://user-images.githubusercontent.com/76575923/140642519-738bdf73-83ea-4189-acd1-dce0cd8d7f30.png)|
 |:-:|
 
@@ -61,11 +61,11 @@ Enable the 514/UDP port on the firewall.
 ![Enable firewall](https://user-images.githubusercontent.com/76575923/141675779-458af2cc-656f-4b78-8a96-564e16e411ee.png)|
 |:-:|
 
-By default, the logs are output to the C:\ProgramData\syslogd folder. C:\ProgramData\syslogd folder is created automatically.
-![syslogd folder](https://user-images.githubusercontent.com/76575923/141675664-add75370-1d06-400c-9901-e2444407e5f8.png)|
+By default, the logs are output to the `C:\ProgramData\syslogd` directory. `C:\ProgramData\syslogd` directory is created automatically.
+![syslogd directory](https://user-images.githubusercontent.com/76575923/141675664-add75370-1d06-400c-9901-e2444407e5f8.png)|
 |:-:|
 
-You can use Local System environment variables to set the log output destination. Example:%ProgramData%\%Date%.log
+You can use Local System environment variables to set the log output destination. Example:`%ProgramData%\%Date%.log`
 
 ```
 local0.err    %ProgramData%\%Date%.log
